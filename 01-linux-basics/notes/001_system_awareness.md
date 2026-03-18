@@ -118,6 +118,7 @@ username : password : UID : GID : comment : home : shell
 - UID = 	0 	    -->  root
 - UID < 	1000	-->  system users
 - UID >=	1000	-->  normal users 
+
 ---
 8. How long has the system been running?
 ```
@@ -125,6 +126,7 @@ erkdk@my-lab:~$ uptime
 
  04:51:41 up 56 min,  1 user,  load average: 0.00, 0.00, 0.00
 ```
+---
 
 9. What processes started at boot?\
 --> The system uses systemd as the init system (PID 1), which is responsible for starting all other services during boot.\
@@ -134,7 +136,7 @@ erkdk@my-lab:~$ ps -p 1 -o comm=
 
 systemd
 ```
-
+---
 10. Who else is logged in (if any)?
 ```
 erkdk@my-lab:~$ who
@@ -152,7 +154,7 @@ erkdk@my-lab:~$ w
 USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU  WHAT
 erkdk             192.168.100.1    03:56   59:13   0.00s  0.08s sshd: erkdk [priv]
 ```
-
+---
 11. What shell using right now?
 ```
 erkdk@my-lab:~$ echo $SHELL
