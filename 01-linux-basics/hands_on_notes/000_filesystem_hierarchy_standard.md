@@ -150,6 +150,7 @@
 
 - [Filesystem Hierarchy Standard](https://documentation.ubuntu.com/project/how-ubuntu-is-made/concepts/filesystem-hierarchy-standard/)
 - [Linux Filesystem Hierarchy - TLDP](https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/)
+- [Gettting started](https://linuxjourney.com/lesson/linux-history)
 
 #### Tip: use this command
 - `man hier` — View the filesystem hierarchy directly in your terminal
