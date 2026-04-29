@@ -15,11 +15,13 @@ and a base operating system volume - all defined as code and reproducible on any
 KVM is a Linux kernel module that turns operating machine into a hypervisor. It loads via kvm.ko or any
 architecture-specific modules (eg. ```kvm-intel.ko```). Once loaded, it exposes ```/dev/kvm```, which userspace programs use to create and run virtual machines with hardware acceleration.
 Each VM appears as a normal process on the host as shown below:
-```
+```hcl
 aadarkdk@pop-os:~$ ps aux | grep qemu
 aadarkdk  101685  0.0  0.0  18892  2684 pts/0    S+   10:58   0:00 grep --color=auto qemu
 aadarkdk@pop-os:~$ 
 ```
+![How these components work together](https://github.com/erkdk/devsecops-journey/blob/main/11-terraform/08-local-infra/screenshots/qemu.png)
+
 
 2. QEMU ( Quick Emulator)
 QEMU is the userspace program that creates the virtual hardware environment. It emulates disk 
@@ -41,13 +43,13 @@ The ``` dmacvicar/libvirt``` provider translates HCL configuration files into li
 Version 0.9.x maps resources directly to libvirt XML elements.
 
 How these components work together?
-![App Screenshot](https://dummyimage.com/468x300?text=App+Screenshot+Here)
+![How these components work together](https://github.com/erkdk/devsecops-journey/blob/main/11-terraform/08-local-infra/screenshots/how_these_work.png)
 
 
 ### Why Terraform for Local Infrastructure ?
   When we follow the imperative approach ( without terraform ), managing libvirt manually requires
   sequential commands such as:
-  ```
+  ```hcl
   virsh net-define network.xml
   virsh net-start lab-network
   virsh pool-define-as lab-storage dir --target /path
@@ -68,11 +70,8 @@ resource "libvirt_network" "mylab_network" {
   name = "mylab-network"
   
   # desired properties declared here
-  
 }
-
 ```
-
 Then a single command handles everything.
 
 ```
@@ -88,12 +87,10 @@ Prerequisites and Initial Setup
 Most Linux distros already have KVM kernel modules and userspace tools available through their packaging systems. If you want to use specific versions of KVM kernel modules and supporting userspace, you can download the latest version by visiting.
 [Downloads here](https://www.linux-kvm.org/page/Downloads)
 
-
 2. Install Terraform: [link](https://developer.hashicorp.com/terraform/install)
 
-
 3. Verify:
-```
+```hcl
 aadarkdk@pop-os:~$ kvm-ok
 INFO: /dev/kvm exists
 KVM acceleration can be used
@@ -112,7 +109,7 @@ aadarkdk@pop-os:~$
 ```
 
 4. Download Base Cloud Image that will serve as VM template.
-```
+```hcl
 sudo mkdir -p /var/lib/libvirt/images
 
 sudo wget -O /var/lib/libvirt/images/noble-server-cloudimg-amd64.img \
@@ -136,14 +133,14 @@ Format specific information:
 aadarkdk@pop-os:~$ 
 ```
 
-![App Screenshot](https://dummyimage.com/468x300?text=App+Screenshot+Here)
+![check the image properties](https://github.com/erkdk/devsecops-journey/blob/main/11-terraform/08-local-infra/screenshots/check-image-info.png)
 
 
 5. Create a working directory
  (ss here) 
  
 6. Create ``` main.tf ``` : Provider and pool definition
-```
+```hcl
 terraform {
   required_providers {
     libvirt = {
@@ -171,7 +168,7 @@ resource "libvirt_pool" "lab" {
 
 7. Initialize terraform: 
 
-(ss here I will put) 
+![Initialize terraform](https://github.com/erkdk/devsecops-journey/blob/main/11-terraform/08-local-infra/screenshots/terraform_init_provider_plugin.png)
 
 - This downloads the provider plugin and create the lock file.
 
@@ -255,9 +252,7 @@ terraform state list
 ```
 
 - Verifying with libvirt Tools
-(I will keep screenshot)
-
-
+![Initialize terraform](https://github.com/erkdk/devsecops-journey/blob/main/11-terraform/08-local-infra/screenshots/verify_state_list.png)
 
 <i> This configuration was developed and tested on Pop!_OS 22.04 with Terraform v1.14.9 and libvirt provider v0.9.7. <i>
 
