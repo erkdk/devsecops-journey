@@ -132,13 +132,12 @@ Format specific information:
     extended l2: false
 aadarkdk@pop-os:~$ 
 ```
-
 ![check the image properties](https://github.com/erkdk/devsecops-journey/blob/main/11-terraform/08-local-infra/screenshots/check-image-info.png)
 
 
 5. Create a working directory
- (ss here) 
- 
+ ![check the image properties](https://github.com/erkdk/devsecops-journey/blob/main/11-terraform/08-local-infra/screenshots/working_directory.png)
+
 6. Create ``` main.tf ``` : Provider and pool definition
 ```hcl
 terraform {
@@ -173,7 +172,7 @@ resource "libvirt_pool" "lab" {
 - This downloads the provider plugin and create the lock file.
 
 8. Virtual Network Configuration: Create ``` network.tf ``` to define network.
-```
+```hcl
 resource "libvirt_network" "lab_network" {
   name      = "lab-network"
   autostart = true
@@ -197,7 +196,6 @@ resource "libvirt_network" "lab_network" {
     name = "mylab.local"
   }
 }
-
 ```
 
 #### When this resource is applied, libvirt automatically does followings:
@@ -218,7 +216,7 @@ Ten VMs from the same backing file consume roughly 2 MB total initially instead 
 Each VM only stores its own changes.
 
 So, Create ``` storage.tf ```:
-```
+```hcl
 resource "libvirt_volume" "base_image" {
   name     = "ubuntu-noble"
   pool     = libvirt_pool.lab.name
@@ -242,12 +240,12 @@ resource "libvirt_volume" "base_image" {
 
 10. Validation and Verification
 - Apply the configuration
-```
+```hcl
 terraform apply
 ```
 
 - Verifying with Terraform
-```
+```hcl
 terraform state list
 ```
 
