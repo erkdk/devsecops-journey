@@ -12,3 +12,26 @@
 - [atlassian.com](https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment)
 
 ![CI/CD](https://github.com/erkdk/devsecops-journey/blob/main/assets/ci-cd.png)
+
+
+### DevOps Pre-Requisites
+1. Operating System & Linux
+2. SDLC
+3. Build & Package Manager Tools: Maven, Gradle (Java), NPM (JS), NuGet (.NET), PyPI (Python)
+4. Version Control System: Git (GitHub, GitLab, Bitbucket)
+
+### Tools of the trade
+1. VM Automation: Vagrant
+2. Web Server Deployment: Apache, Nginx 
+3. Containerization Platform: Docker, Podman
+4. CI/CD:  Jenkins, GitHub Action
+5. Configuration Management: Ansible
+6. Container Orchestration: Kubernetes (K8s),  Docker Swarm
+7. Continuous Testing:
+- SAST: SonarQube, Snyk
+- DAST: OWASP ZAP, Nikto
+8. Software Artifactory: Docker Hub, Harbor, JFrog Artifactory
+9. Cloud Platform: AWS, GCP, Azure
+10. Infrastructure as the Code(IaC): Terraform, OpenTofu, Pulumi
+11. Monitoring: Prometheus, Grafana
+12. Logging: ELK (Elasticsearch, Logstash, Kibana), Loki
