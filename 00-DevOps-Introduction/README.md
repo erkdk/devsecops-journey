@@ -28,8 +28,8 @@
 5. Configuration Management: Ansible
 6. Container Orchestration: Kubernetes (K8s),  Docker Swarm
 7. Continuous Testing:
-- SAST: SonarQube, Snyk
-- DAST: OWASP ZAP, Nikto
+- SAST (Static Application Security Testing): SonarQube, Snyk
+- DAST (Dynamic Application Security Testing): OWASP ZAP, Nikto
 8. Software Artifactory: Docker Hub, Harbor, JFrog Artifactory
 9. Cloud Platform: AWS, GCP, Azure
 10. Infrastructure as the Code(IaC): Terraform, OpenTofu, Pulumi
