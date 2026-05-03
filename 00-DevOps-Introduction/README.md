@@ -8,7 +8,7 @@
 ### Benefits of DevOps
 - [salesforce.com](https://www.salesforce.com/platform/devops-tools/what-is-devops/benefits/)
 
-### Continuous Integration to Continuous Deployment to Continuous Delivery
+### Continuous Integration | Continuous Delivery | Continuous Deployment
 - [atlassian.com](https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment)
 
 ![CI/CD](https://github.com/erkdk/devsecops-journey/blob/main/assets/ci-cd.png)
