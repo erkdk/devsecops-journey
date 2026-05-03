@@ -11,3 +11,4 @@
 ### Continuous Integration to Continuous Deployment to Continuous Delivery
 - [atlassian.com](https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment)
 
+![CI/CD](https://github.com/erkdk/devsecops-journey/blob/main/assets/ci-cd.png)
