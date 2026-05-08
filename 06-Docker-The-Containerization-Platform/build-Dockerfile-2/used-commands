@@ -1,0 +1,9 @@
+    docker images
+    vim Dockerfile
+    vim index.html
+    docker image build -t mycustomimg2:v2 .
+    docker images
+    docker container run -d --name test2nginx -p 8091:80 mycustomimg2:v2
+    docker ps
+    curl localhost:8091
+

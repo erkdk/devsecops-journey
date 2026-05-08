@@ -1,0 +1,158 @@
+MANAGER01
+vagrant@manager01:~$ 
+    2  ip addr show
+    4  docker swarm init --advertise-addr 192.168.56.11
+    6  docker swarm join-token manager
+    7  docker swarm join-token worker
+    9 docker node ls
+   13  git clone https://github.com/erkdk/dataDash.git dockerize-dataDash
+   15  cd dockerize-dataDash/
+   20  git checkout develop
+   21  git branch
+   22  git checkout -b feature/dockerize-initial-setup
+   23  git branch  
+   24  ping 192.168.56.10
+   25  curl -k https://192.168.56.10
+# To allow communication with a non-HTTPS Docker registry (usually like Harbor or a local registry) hosted at 192.168.56.10 
+   26  sudo nano /etc/docker/daemon.json
+   27  sudo systemctl daemon-reexec
+   28  sudo systemctl restart docker
+   29  docker login 192.168.56.10
+   30  sudo nano /etc/hosts
+   31  ping harbor.local
+   32  docker login 192.168.56.10  
+# Testing the image push to Harbor
+   33  docker pull alpine
+   34  docker tag alpine 192.168.56.10/library/alpine:test
+   35  docker push 192.168.56.10/library/alpine:test
+   38  cd dockerize-dataDash/
+   40  cd client/
+   49  vim .dockerignore
+   52  cd ..
+   54  cd server/
+   60  vim Dockerfile
+   61  vim .dockerignore
+   68  cd client/
+   80  docker build -t 192.168.56.10/data-dash/client:v1.0.0 .
+   81  docker images
+   82  docker push 192.168.56.10/data-dash/client:v1.0.0
+   83  cd .. 
+   84  cd server/
+   88  docker build -t 192.168.56.10/data-dash/server:v1.0.0 .
+   89  docker images
+   90  docker push 192.168.56.10/data-dash/server:v1.0.0
+   91  cd ..
+   93  vim docker-stack.yml  
+   96  docker network create --driver=overlay --attachable data-dash-net
+   97  docker stack deploy -c docker-stack.yml data-dash
+   98  docker service ls
+   99  docker service logs data-dash_client
+  100  docker service logs data-dash_server
+  104  vim .env
+  105  ls -la
+  123  docker stack deploy -c docker-stack.yml data-dash
+  124  docker service ls
+  128  docker service ps data-dash_client
+  130  curl http://192.168.56.11:3000
+  148  cd client/
+  149  docker build -t 192.168.56.10/data-dash/client:v1.0.1 .
+  150  docker push 192.168.56.10/data-dash/client:v1.0.1
+  151  cd ..
+  152  cd server/
+  154  vim Dockerfile
+  155  docker build -t 192.168.56.10/data-dash/server:v1.0.1 .
+  156  docker push 192.168.56.10/data-dash/server:v1.0.1
+  157  cd ..
+  158  vim docker-stack.yml
+  159  docker stack deploy -c docker-stack.yml data-dash
+  160  docker service ls
+  165  docker node ls
+  166  docker service ls
+  176  docker service ps data-dash_client
+  177  docker service ps data-dash_server
+  178  docker service logs data-dash_server
+  187  docker build -t 192.68.56.10/data-dash/server:v1.0.2 .
+  188  docker push 192.168.56.10/data-dash/server:v1.0.2
+  189  docker tag 192.168.56.10/data-dash/server:v1.0.2
+  190  docker tag data-dash-server:latest 192.168.56.10/data-dash/server:v1.0.2
+  191  docker images
+  192  docker tag 192.68.56.10/data-dash/server:v1.0.2 192.168.56.10/data-dash/server:v1.0.2
+  193  docker push 192.168.56.10/data-dash/server:v1.0.3
+  195  cd ..
+  197  vim docker-stack.yml
+  198  docker stack deploy -c docker-stack.yml data-dash
+  200  docker service logs data-dash_server
+  201  docker service ls
+  203  cd server/
+  206  docker build -t 192.68.56.10/data-dash/server:v1.0.3 .
+  207  docker tag 192.168.56.10/data-dash/server:v1.0.3 192.168.56.10/data-dash/server:v1.0.3
+  213  cd dockerize-dataDash/
+  215  cd server/
+  219  nano Dockerfile
+  220  docker images
+  221  docker build -t 192.168.56.10/data-dash/server:v1.0.4 .
+  223  docker images
+  224  docker image rm 192.168.56.10/data-dash/server
+  228  docker build -t 192.168.56.10/data-dash/server:v1.0.3 .
+  229  docker push 192.168.56.10/data-dash/server:v1.0.3
+  230  cd ..
+  235  vim docker-stack.yml
+  236  docker stack deploy -c docker-stack.yml data-dash
+  237  docker service ls
+  239  docker service logs data-dash_server
+  240  docker service logs data-dash_client
+  241  docker service ls
+  261  vim Dockerfile
+  262  docker build -t 192.168.56.10/data-dash/client:v1.0.2 .
+  263  docker push 192.168.56.10/data-dash/client:v1.0.2
+  264  cd ..
+  265  nano docker-stack.yml
+  266  docker stack deploy -c docker-stack.yml data-dash
+  267  docker service ls
+  268  docker service ps data-dash_client --no-trunc
+  269  docker service ps data-dash_server --no-trunc
+  271  docker node ls
+  272  docker service ls
+  273  docker volume create portainer_data
+  274  docker service create   --name portainer   --publish 9000:9000   --publish 9443:9443   --replicas=1   --constraint 'node.role == manager'   --mount type=bind,src=/var/run/docker.soc>
+  275  docker service scale data-dash_client=4
+  276  docker service scale data-dash_server=4
+  277  docker service ls
+  279  docker restart portainer
+  280  docker ps
+  284  docker container prune
+  285  docker node ls
+  346  docker service scale data-dash_server=10
+  347  docker service scale data-dash_client=10
+  349  docker service ls
+  350  docker service scale data-dash_client=2
+  351  docker service scale data-dash_server=2
+
+MANAGER02
+vagrant@manager02:~$
+    4  docker swarm join --token SWMTKN-1-45pw9bwsmp1i5alimd6nl2ne19fau0dppr8rfn3npw0ubofs21-8r72napsjo3ds21jq4xkv6yno 192.168.56.11:2377
+    5  ping 192.168.56.10
+    6  curl -k https://192.168.56.10
+    7  sudo nano /etc/docker/daemon.json
+    8  sudo systemctl daemon-reexec
+    9  sudo systemctl restart docker
+   10  sudo nano /etc/hosts
+   11  ping harbor.local
+   12  docker login 192.168.56.10
+   13  docker pull 192.168.56.10/library/alpine:test
+   14  docker images
+   17  docker node ls
+   40  docker service ps data-dash_client --no-trunc
+   41  docker service ps data-dash_server --no-trunc
+   42  docker ps
+   43  docker ps -a
+   44  docker container prune
+   47  docker node ls
+   48  docker service ls
+   51  docker container ps
+vagrant@manager02:~$ 
+
+
+
+
+

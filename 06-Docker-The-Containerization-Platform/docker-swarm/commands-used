@@ -1,0 +1,21 @@
+cd docker-swarm/
+
+ vim Vagrantfile 
+ vagrant up
+
+ vagrant status
+ vagrant ssh manager01
+
+vagrant@manager01:~$ ip addr show
+   docker system info
+   docker ps
+   docker ps -a
+   docker swarm init
+   ip addr show
+   docker swarm init --advertise-addr 192.168.56.11
+   docker system info
+   docker system info | grep swarm
+   docker system info | grep -i swarm
+   docker node ls
+   
+

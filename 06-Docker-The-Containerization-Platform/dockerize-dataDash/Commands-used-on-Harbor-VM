@@ -1,0 +1,88 @@
+vagrant@vagrant:~/harbor$ history
+    1  docker container ps
+
+    3  sudo apt update
+
+    5  openssl version
+    6  cd /etc/
+    7  ls
+    8  cd harbor
+
+   11  cd
+
+   15  sudo mkdir -p /etc/harbor/ssl
+   
+# Generate SSL certs for Harbor(self-signed, for testing)
+   16  cd /etc/harbor/ssl
+   17  sudo openssl req -newkey rsa:4096 -nodes -sha256 -keyout harbor.key -x509 -days 365 -out harbor.crt
+   18  ls
+   19  cat harbor.crt 
+   20  cat harbor.key 
+   21  clear
+   
+# Download and extract Harbor offline installer   
+   22  cd
+   23  wget https://github.com/goharbor/harbor/releases/download/v2.13.1/harbor-offline-installer-v2.13.1.tgz
+   24  ls
+   25  tar -zxvf harbor-offline-installer-v2.13.1.tgz 
+   26  ls
+   27  cd harbor
+   
+# Configure Harbor
+   28  ls
+   29  cp harbor.yml.tmpl harbor.yml
+   30  ls
+   31  nano harbor.yml
+# The IP address or hostname to access admin UI and registry service.
+# DO NOT use localhost or 127.0.0.1, because Harbor needs to be accessed by external clients.
+--->hostname: harbor.local  (this line modified)
+# The initial password of Harbor admin
+# It only works in first time to install harbor
+# Remember Change the admin password from UI after launching Harbor.
+--->harbor_admin_password: AadarshA1! (this line modified)
+
+   33  nano harbor.yml
+   
+# Install Harbor
+   34  sudo ./install.sh
+
+
+# Add Docker's official GPG key:
+   46  sudo apt-get update
+   47  sudo apt-get install ca-certificates curl
+   48  sudo install -m 0755 -d /etc/apt/keyrings
+   49  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+   50  sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+   52  echo   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+       $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" |   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Install Docker engine and plugins   
+   54  sudo apt-get update
+   55  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Add user to docker group and apply change
+   56  sudo groupadd docker
+   57  sudo usermod -aG docker vagrant
+   58  docker container ps
+   59  newgrp docker
+   
+   78  rm -r harbor-offline-installer-v2.13.1.tgz 
+
+vagrant@vagrant:~/harbor$ 
+
+# Run Harbor after VM reboot or vagrant up or manual restart
+aadarkdk@pop-os:~$ cd Desktop/harbor/
+aadarkdk@pop-os:~/Desktop/harbor$ ls
+Vagrantfile
+aadarkdk@pop-os:~/Desktop/harbor$ vagrant up
+aadarkdk@pop-os:~/Desktop/harbor$ vagrant ssh
+vagrant@vagrant:~$ cd harbor/
+vagrant@vagrant:~/harbor$ docker compose up -d
+open /home/vagrant/harbor/common/config/core/env: permission denied
+vagrant@vagrant:~/harbor$ sudo docker compose up -d
+
+ 
+
+

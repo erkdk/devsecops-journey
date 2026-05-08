@@ -1,0 +1,57 @@
+WORKER01
+vagrant@worker01:~$
+    1  clear
+    4  docker swarm join --token SWMTKN-1-45pw9bwsmp1i5alimd6nl2ne19fau0dppr8rfn3npw0ubofs21-19ajnnogbe21qs4vkvgf6le1t 192.168.56.11:2377
+   11  ping 192.168.56.10
+   12  curl -k https://192.168.56.10
+   13  sudo nano /etc/docker/daemon.json
+   14  sudo nano /etc/hosts
+   15  ping harbor.local
+   16  docker login 192.168.56.10
+   17  sudo systemctl daemon-reexec
+   18  sudo docker systemctl restart docker
+   19  sudo systemctl restart docker
+   20  docker login 192.168.56.10
+   26  docker container ps
+   27  docker container ps -a
+   28  docker container prune
+vagrant@worker01:~$ 
+
+
+WORKER02
+vagrant@worker02:~$ history
+    4  docker swarm join --token SWMTKN-1-45pw9bwsmp1i5alimd6nl2ne19fau0dppr8rfn3npw0ubofs21-19ajnnogbe21qs4vkvgf6le1t 192.168.56.11:2377
+    7  ping 192.168.56.10
+    8  curl -k https://192.168.56.10
+    9  sudo nano /etc/hosts
+   10  ping harbor.local
+   11  docker login 192.168.56.10
+   12  sudo systemctl daemon-reexec
+   13  sudo systemctl restart docker
+   14  docker login
+   15  docker login 192.168.56.10
+   20  docker container ps
+   21  docker container ps -a
+   22  docker container prune
+vagrant@worker02:~$ 
+
+
+WORKER03
+vagrant@worker03:~$ history
+    4  docker swarm join --token SWMTKN-1-45pw9bwsmp1i5alimd6nl2ne19fau0dppr8rfn3npw0ubofs21-19ajnnogbe21qs4vkvgf6le1t 192.168.56.11:2377
+    8  ping 192.168.56.10
+    9  curl -k https://192.168.56.10
+   10  sudo nano /etc/hosts
+   11  ping harbor.local
+   12  sudo systemctl daemon-reexec
+   13  sudo systemctl restart docker
+   14  docker login 192.168.56.10
+   15  clear
+   16  docker ps
+   18  docker container ps
+   19  docker container ps -a
+   20  docker container prune
+vagrant@worker03:~$ 
+
+
+

@@ -1,0 +1,17 @@
+   vim Dockerfile 
+   
+   docker image build -t myapp1:v1 .
+   
+   clear
+   
+   docker images
+   docker container ps -a
+ 
+   docker run -d -p 3000:3000 --name weather-app myapp1:v1
+   docker container ps -a
+   
+   curl localhost:3000
+   docker ps
+   
+   clear
+   docker exec -it weather-app bash

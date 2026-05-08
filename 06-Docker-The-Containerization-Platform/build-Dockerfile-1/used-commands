@@ -1,0 +1,20 @@
+    docker container run nginx
+
+    clear
+
+    docker images
+
+    vim Dockerfile   
+    vim index.html   
+
+    docker ps   
+
+    docker image build .
+
+    docker images
+
+    docker container run -d --name mylocalnginx1 -p 8070:80 865098746c22
+    docker ps
+
+    curl localhost:8070
+

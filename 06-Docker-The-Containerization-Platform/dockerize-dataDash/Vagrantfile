@@ -1,0 +1,55 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+	
+$install_docker_script = <<-SCRIPT
+echo "Installing Docker..."
+sudo apt-get update -y
+sudo apt-get install -y curl
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+sudo usermod -aG docker vagrant
+sudo systemctl enable docker
+sudo systemctl start docker
+SCRIPT
+
+BOX_NAME = "bento/ubuntu-24.04"
+MEMORY = "1536"
+CPUS = 1
+MANAGERS = 2
+WORKERS = 3
+SUBNET = "192.168.56."
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = BOX_NAME
+  config.vm.synced_folder ".", "/vagrant"
+
+  # Create Manager Nodes
+  (1..MANAGERS).each do |i|
+    config.vm.define "manager0#{i}" do |manager|
+      manager.vm.hostname = "manager0#{i}"
+      manager.vm.network "private_network", ip: "#{SUBNET}1#{i}"
+      manager.vm.provider "virtualbox" do |vb|
+        vb.memory = MEMORY
+        vb.cpus = CPUS
+        vb.name = "manager0#{i}"
+      end
+      manager.vm.provision "shell", inline: $install_docker_script
+    end
+  end
+
+  # Create Worker Nodes
+  (1..WORKERS).each do |i|
+    config.vm.define "worker0#{i}" do |worker|
+      worker.vm.hostname = "worker0#{i}"
+      worker.vm.network "private_network", ip: "#{SUBNET}2#{i}"
+      worker.vm.provider "virtualbox" do |vb|
+        vb.memory = MEMORY
+        vb.cpus = CPUS
+        vb.name = "worker0#{i}"
+      end
+      worker.vm.provision "shell", inline: $install_docker_script
+    end
+  end
+end
+
