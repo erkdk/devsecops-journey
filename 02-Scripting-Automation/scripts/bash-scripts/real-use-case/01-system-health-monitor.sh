@@ -19,5 +19,5 @@ echo "CPU Load: "
 top -bn1 | grep "load average"
 
 echo " "
-echo " Logged in users: "
+echo "Logged in users:"
 w
