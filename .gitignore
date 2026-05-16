@@ -1,1 +1,27 @@
 .vagrant/
+
+# Terraform
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.backup
+**/.terraform.lock.hcl
+
+crash.log
+crash.*.log
+
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# AWS credentials
+**/.aws/
+*.pem
+*.key
+
+# Logs
+*.log
+crash.log
+
+# OS
+.DS_Store
