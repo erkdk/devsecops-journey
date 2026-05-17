@@ -178,6 +178,6 @@ users = [
 ]
 ```
 ---
--**Note**: 
+- **Note**: 
 *Policies define permissions, and IAM users, groups, and roles are assigned policies.*
 ---
