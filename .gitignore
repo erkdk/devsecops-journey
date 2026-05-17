@@ -1,27 +1,54 @@
+# -------------------------
+# Vagrant
+# -------------------------
 .vagrant/
 
+# -------------------------
 # Terraform
-**/.terraform/
+# -------------------------
+**/.terraform/*
 **/*.tfstate
-**/*.tfstate.backup
+**/*.tfstate.*
 **/.terraform.lock.hcl
 
+# Terraform variable files
+**/*.tfvars
+**/*.tfvars.json
+
+# Secret environment files
+**/aws-env.sh
+**/.env
+
+# Crash logs
 crash.log
 crash.*.log
 
+# Override files
 override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
 
-# AWS credentials
+# -------------------------
+# AWS Credentials
+# -------------------------
 **/.aws/
 *.pem
 *.key
 
+# -------------------------
 # Logs
+# -------------------------
 *.log
-crash.log
 
-# OS
+# -------------------------
+# OS Files
+# -------------------------
 .DS_Store
+Thumbs.db
+
+# -------------------------
+# IDE Files
+# -------------------------
+.vscode/
+.idea/
